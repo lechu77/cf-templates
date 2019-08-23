@@ -1,228 +1,276 @@
-{
-    "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "VPC Standard Security Grpup",
-    "Parameters": {
-        "VPC": {
-            "Type": "AWS::EC2::VPC::Id",
-            "Description": "VPC where the Security Groups will be created"
-        }
-    },
-    "Resources": {
-        "EC2SGWEB": {
-            "Type": "AWS::EC2::SecurityGroup",
-            "Properties": {
-                "GroupName": "WEB",
-                "GroupDescription": "VPC SG Standards - WEB - HTTP - HTTPS",
-                "VpcId": {
-                    "Ref": "VPC"
-                },
-                "SecurityGroupIngress": [
-                    {
-                        "IpProtocol": "tcp",
-                        "CidrIp": "0.0.0.0/0",
-                        "FromPort": "443",
-                        "ToPort": "443"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "CidrIp": "0.0.0.0/0",
-                        "FromPort": "80",
-                        "ToPort": "80"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "CidrIp": "0.0.0.0/0",
-                        "FromPort": "8080",
-                        "ToPort": "8080"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "CidrIp": "0.0.0.0/0",
-                        "FromPort": "8443",
-                        "ToPort": "8443"
-                    }
-                ]
-            },
-            "Metadata": {
-                "AWS::CloudFormation::Designer": {
-                    "id": "f8e8774c-bd07-4241-a53e-0dc9186055bf"
-                }
-            }
-        },
-        "EC2SGDB": {
-            "Type": "AWS::EC2::SecurityGroup",
-            "Properties": {
-                "GroupName": "DB",
-                "GroupDescription": "VPC SG Standards - DB",
-                "VpcId": {
-                    "Ref": "VPC"
-                },
-                "SecurityGroupIngress": [
-                    {
-                        "IpProtocol": "tcp",
-                        "CidrIp": "0.0.0.0/0",
-                        "FromPort": "3306",
-                        "ToPort": "3306"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "CidrIp": "0.0.0.0/0",
-                        "FromPort": "5432",
-                        "ToPort": "5432"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "CidrIp": "0.0.0.0/0",
-                        "FromPort": "1433",
-                        "ToPort": "1433"
-                    }
-                ]
-            },
-            "Metadata": {
-                "AWS::CloudFormation::Designer": {
-                    "id": "ca164b13-8641-4474-833c-e3680d0f82c9"
-                }
-            }
-        },
-        "EC2SGVPN": {
-            "Type": "AWS::EC2::SecurityGroup",
-            "Properties": {
-                "GroupName": "VPN",
-                "GroupDescription": "VPC SG Standards - VPN",
-                "VpcId": {
-                    "Ref": "VPC"
-                },
-                "SecurityGroupIngress": [
-                    {
-                        "IpProtocol": "tcp",
-                        "CidrIp": "0.0.0.0/0",
-                        "FromPort": "47",
-                        "ToPort": "47"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "CidrIp": "0.0.0.0/0",
-                        "FromPort": "50",
-                        "ToPort": "51"
-                    },
-                    {
-                        "IpProtocol": "udp",
-                        "CidrIp": "0.0.0.0/0",
-                        "FromPort": "500",
-                        "ToPort": "500"
-                    },
-                    {
-                        "IpProtocol": "udp",
-                        "CidrIp": "0.0.0.0/0",
-                        "FromPort": "4500",
-                        "ToPort": "4500"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "CidrIp": "0.0.0.0/0",
-                        "FromPort": "443",
-                        "ToPort": "443"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "CidrIp": "0.0.0.0/0",
-                        "FromPort": "1194",
-                        "ToPort": "1194"
-                    },
-                    {
-                        "IpProtocol": "udp",
-                        "CidrIp": "0.0.0.0/0",
-                        "FromPort": "1194",
-                        "ToPort": "1194"
-                    }
-                ]
-            },
-            "Metadata": {
-                "AWS::CloudFormation::Designer": {
-                    "id": "70eb4818-6442-40ff-8494-b105b9bf15e3"
-                }
-            }
-        },
-        "EC2SGRA": {
-            "Type": "AWS::EC2::SecurityGroup",
-            "Properties": {
-                "GroupName": "Remote Access",
-                "GroupDescription": "VPC SG Standards - SSH - RDP",
-                "VpcId": {
-                    "Ref": "VPC"
-                },
-                "SecurityGroupIngress": [
-                    {
-                        "IpProtocol": "tcp",
-                        "CidrIp": "0.0.0.0/0",
-                        "FromPort": "22",
-                        "ToPort": "22"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "CidrIp": "0.0.0.0/0",
-                        "FromPort": "3389",
-                        "ToPort": "3389"
-                    }
-                ]
-            },
-            "Metadata": {
-                "AWS::CloudFormation::Designer": {
-                    "id": "06241e22-ea04-4a7c-83a4-30058abad7a3"
-                }
-            }
-        }
-    },
-    "Metadata": {
-        "AWS::CloudFormation::Designer": {
-            "f8e8774c-bd07-4241-a53e-0dc9186055bf": {
-                "size": {
-                    "width": 60,
-                    "height": 60
-                },
-                "position": {
-                    "x": -490,
-                    "y": 20
-                },
-                "z": 1,
-                "embeds": []
-            },
-            "ca164b13-8641-4474-833c-e3680d0f82c9": {
-                "size": {
-                    "width": 60,
-                    "height": 60
-                },
-                "position": {
-                    "x": -420,
-                    "y": 20
-                },
-                "z": 1,
-                "embeds": []
-            },
-            "70eb4818-6442-40ff-8494-b105b9bf15e3": {
-                "size": {
-                    "width": 60,
-                    "height": 60
-                },
-                "position": {
-                    "x": -350,
-                    "y": 20
-                },
-                "z": 1,
-                "embeds": []
-            },
-            "06241e22-ea04-4a7c-83a4-30058abad7a3": {
-                "size": {
-                    "width": 60,
-                    "height": 60
-                },
-                "position": {
-                    "x": -280,
-                    "y": 20
-                },
-                "z": 1,
-                "embeds": []
-            }
-        }
+﻿{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "VPC Standard Security Grpup",
+  "Parameters": {
+    "VPC": {
+      "Type": "AWS::EC2::VPC::Id",
+      "Description": "VPC where the Security Groups will be created"
     }
+  },
+  "Resources": {
+    "EC2SGWEB": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupName": "WEB",
+        "GroupDescription": "VPC SG Standards - WEB - HTTP - HTTPS",
+        "VpcId": {
+          "Ref": "VPC"
+        },
+        "SecurityGroupIngress": [
+          {
+            "IpProtocol": "tcp",
+            "CidrIp": "0.0.0.0/0",
+            "FromPort": "443",
+            "ToPort": "443"
+          },
+          {
+            "IpProtocol": "tcp",
+            "CidrIp": "0.0.0.0/0",
+            "FromPort": "80",
+            "ToPort": "80"
+          },
+          {
+            "IpProtocol": "tcp",
+            "CidrIp": "0.0.0.0/0",
+            "FromPort": "8080",
+            "ToPort": "8080"
+          },
+          {
+            "IpProtocol": "tcp",
+            "CidrIp": "0.0.0.0/0",
+            "FromPort": "8443",
+            "ToPort": "8443"
+          }
+        ]
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "f8e8774c-bd07-4241-a53e-0dc9186055bf"
+        }
+      }
+    },
+    "EC2SGDB": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupName": "DB",
+        "GroupDescription": "VPC SG Standards - DB",
+        "VpcId": {
+          "Ref": "VPC"
+        },
+        "SecurityGroupIngress": [
+          {
+            "IpProtocol": "tcp",
+            "CidrIp": "0.0.0.0/0",
+            "FromPort": "3306",
+            "ToPort": "3306"
+          },
+          {
+            "IpProtocol": "tcp",
+            "CidrIp": "0.0.0.0/0",
+            "FromPort": "5432",
+            "ToPort": "5432"
+          },
+          {
+            "IpProtocol": "tcp",
+            "CidrIp": "0.0.0.0/0",
+            "FromPort": "1433",
+            "ToPort": "1433"
+          }
+        ]
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "ca164b13-8641-4474-833c-e3680d0f82c9"
+        }
+      }
+    },
+    "EC2SGVPN": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupName": "VPN",
+        "GroupDescription": "VPC SG Standards - VPN",
+        "VpcId": {
+          "Ref": "VPC"
+        },
+        "SecurityGroupIngress": [
+          {
+            "IpProtocol": "tcp",
+            "CidrIp": "0.0.0.0/0",
+            "FromPort": "47",
+            "ToPort": "47"
+          },
+          {
+            "IpProtocol": "tcp",
+            "CidrIp": "0.0.0.0/0",
+            "FromPort": "50",
+            "ToPort": "51"
+          },
+          {
+            "IpProtocol": "udp",
+            "CidrIp": "0.0.0.0/0",
+            "FromPort": "500",
+            "ToPort": "500"
+          },
+          {
+            "IpProtocol": "udp",
+            "CidrIp": "0.0.0.0/0",
+            "FromPort": "4500",
+            "ToPort": "4500"
+          },
+          {
+            "IpProtocol": "tcp",
+            "CidrIp": "0.0.0.0/0",
+            "FromPort": "443",
+            "ToPort": "443"
+          },
+          {
+            "IpProtocol": "tcp",
+            "CidrIp": "0.0.0.0/0",
+            "FromPort": "1194",
+            "ToPort": "1194"
+          },
+          {
+            "IpProtocol": "udp",
+            "CidrIp": "0.0.0.0/0",
+            "FromPort": "1194",
+            "ToPort": "1194"
+          }
+        ]
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "70eb4818-6442-40ff-8494-b105b9bf15e3"
+        }
+      }
+    },
+    "EC2SGRA": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupName": "SSH - RDP",
+        "GroupDescription": "VPC SG Standards - SSH - RDP",
+        "VpcId": {
+          "Ref": "VPC"
+        },
+        "SecurityGroupIngress": [
+          {
+            "IpProtocol": "tcp",
+            "CidrIp": "0.0.0.0/0",
+            "FromPort": "22",
+            "ToPort": "22"
+          },
+          {
+            "IpProtocol": "tcp",
+            "CidrIp": "0.0.0.0/0",
+            "FromPort": "3389",
+            "ToPort": "3389"
+          }
+        ]
+      },
+      "Metadata": {
+        "AWS::CloudFormation::Designer": {
+          "id": "06241e22-ea04-4a7c-83a4-30058abad7a3"
+        }
+      }
+    },
+    "EC2SGMISC": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupName": "MISC",
+        "GroupDescription": "VPC SG Standards - WEB - HTTP - HTTPS",
+        "VpcId": {
+          "Ref": "VPC"
+        },
+        "SecurityGroupIngress": [
+          {
+            "IpProtocol": "icmp",
+            "CidrIp": "0.0.0.0/0",
+            "FromPort": "-1",
+            "ToPort": "-1"
+          },
+          {
+            "IpProtocol": "-1",
+            "CidrIp": "10.0.0.0/8",
+            "FromPort": "-1",
+            "ToPort": "-1"
+          },
+          {
+            "IpProtocol": "-1",
+            "CidrIp": "172.0.0.0/8",
+            "FromPort": "-1",
+            "ToPort": "-1"
+          },
+          {
+            "IpProtocol": "-1",
+            "CidrIp": "192.0.0.0/8",
+            "FromPort": "-1",
+            "ToPort": "-1"
+          }
+        ]
+      }
+    }
+  },
+  "Metadata": {
+    "AWS::CloudFormation::Designer": {
+      "f8e8774c-bd07-4241-a53e-0dc9186055bf": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": -490,
+          "y": 20
+        },
+        "z": 1,
+        "embeds": []
+      },
+      "ca164b13-8641-4474-833c-e3680d0f82c9": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": -420,
+          "y": 20
+        },
+        "z": 1,
+        "embeds": []
+      },
+      "70eb4818-6442-40ff-8494-b105b9bf15e3": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": -350,
+          "y": 20
+        },
+        "z": 1,
+        "embeds": []
+      },
+      "06241e22-ea04-4a7c-83a4-30058abad7a3": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": -280,
+          "y": 20
+        },
+        "z": 1,
+        "embeds": []
+      },
+      "dc77b5e7-0f50-4f7d-bd6d-3ac4e69ebba0": {
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "position": {
+          "x": -560,
+          "y": 20
+        },
+        "z": 1,
+        "embeds": []
+      }
+    }
+  }
 }
