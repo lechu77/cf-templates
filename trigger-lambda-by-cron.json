@@ -1,0 +1,49 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation template to create an EventBridge rule to trigger an existing Lambda function.
+
+Parameters:
+  LambdaFunctionName:
+    Type: String
+    Description: Name of the existing Lambda function to trigger.
+  
+  SchedulePeriod:
+    Type: String
+    Description: "Select the schedule period for the rule."
+    AllowedValues: 
+      - rate(5 minutes)
+      - rate(15 minutes)
+      - rate(1 hour)
+      - rate(6 hours)
+      - rate(12 hours)
+      - rate(1 day)
+    Default: rate(1 hour)
+  
+  RuleState:
+    Type: String
+    Description: Enable or disable the rule.
+    AllowedValues: [ENABLED, DISABLED]
+    Default: ENABLED
+
+Resources:
+  EventRule:
+    Type: AWS::Events::Rule
+    Properties: 
+      Name: !Sub "${LambdaFunctionName}TriggerRule"
+      ScheduleExpression: !Ref SchedulePeriod
+      State: !Ref RuleState
+      Targets: 
+        - Arn: !Sub "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${LambdaFunctionName}"
+          Id: LambdaFunctionTarget
+
+  LambdaInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref LambdaFunctionName
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt EventRule.Arn
+
+Outputs:
+  RuleName:
+    Description: "The name of the EventBridge rule."
+    Value: !Ref EventRule
