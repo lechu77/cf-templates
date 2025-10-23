@@ -17,7 +17,7 @@ Welcome to my collection of AWS CloudFormation templates! 🚀 This repository c
 ## 🔐 Security Templates
 
 ### AWS Security Hub
-**File:** `EnableAWSSecurityHub.yaml`
+**File:** `templates/EnableAWSSecurityHub.yaml`
 
 Enables AWS Security Hub with multiple security standards for comprehensive security monitoring.
 
@@ -30,7 +30,7 @@ Enables AWS Security Hub with multiple security standards for comprehensive secu
 **Use Case:** Perfect for organizations requiring comprehensive security compliance and monitoring across multiple frameworks.
 
 ### Amazon GuardDuty
-**File:** `EnableAmazonGuardDuty.yaml`
+**File:** `templates/EnableAmazonGuardDuty.yaml`
 
 Activates Amazon GuardDuty for intelligent threat detection.
 
@@ -42,7 +42,7 @@ Activates Amazon GuardDuty for intelligent threat detection.
 **Use Case:** Essential for automated threat detection and security monitoring in your AWS environment.
 
 ### AWS Config
-**File:** `EnableAWSConfig.yml`
+**File:** `templates/EnableAWSConfig.yml`
 
 Comprehensive AWS Config setup with customizable recording and delivery options.
 
@@ -63,7 +63,7 @@ Comprehensive AWS Config setup with customizable recording and delivery options.
 ## 🌐 Networking Templates
 
 ### VPC Standard Security Groups
-**File:** `vpc-standards-sg.json`
+**File:** `templates/vpc-standards-sg.json`
 
 Creates standardized security groups for web applications.
 
@@ -80,12 +80,12 @@ Creates standardized security groups for web applications.
 
 ### Multi-AZ VPC Templates
 **Files:** 
-- `aws-vpc.template.json` (10.0.0.0/16)
-- `aws-vpc.10.0.0.0-template.json` (10.0.0.0/16)
-- `aws-vpc.10.1.0.0-template.json` (10.1.0.0/16)
-- `aws-vpc.10.2.0.0-template.json` (10.2.0.0/16)
-- `aws-vpc.10.3.0.0-template.json` (10.3.0.0/16)
-- `aws-vpc.10.21.0.0-template.json` (10.21.0.0/16)
+- `templates/aws-vpc.template.json` (10.0.0.0/16)
+- `templates/aws-vpc.10.0.0.0-template.json` (10.0.0.0/16)
+- `templates/aws-vpc.10.1.0.0-template.json` (10.1.0.0/16)
+- `templates/aws-vpc.10.2.0.0-template.json` (10.2.0.0/16)
+- `templates/aws-vpc.10.3.0.0-template.json` (10.3.0.0/16)
+- `templates/aws-vpc.10.21.0.0-template.json` (10.21.0.0/16)
 
 Production-ready VPC templates with different CIDR ranges for various environments.
 
@@ -110,7 +110,7 @@ Production-ready VPC templates with different CIDR ranges for various environmen
 ## ⚡ Lambda & Automation Templates
 
 ### VPN Health Check Lambda
-**File:** `check-vpn-on-EC2.json`
+**File:** `templates/check-vpn-on-EC2.json`
 
 Lambda function to monitor and restart VPN connections on EC2 instances.
 
@@ -130,7 +130,7 @@ Lambda function to monitor and restart VPN connections on EC2 instances.
 **Use Case:** Automated monitoring and healing of VPN connections in hybrid cloud environments.
 
 ### EventBridge Lambda Scheduler
-**File:** `trigger-lambda-by-cron.json`
+**File:** `templates/trigger-lambda-by-cron.json`
 
 Creates EventBridge rules to trigger existing Lambda functions on a schedule.
 
@@ -166,13 +166,13 @@ cd cf-templates
 # Example: Deploy Security Hub
 aws cloudformation create-stack \
   --stack-name my-security-hub \
-  --template-body file://EnableAWSSecurityHub.yaml \
+  --template-body file://templates/EnableAWSSecurityHub.yaml \
   --region us-east-1
 
 # Example: Deploy VPC
 aws cloudformation create-stack \
   --stack-name my-vpc \
-  --template-body file://aws-vpc.10.0.0.0-template.json \
+  --template-body file://templates/aws-vpc.10.0.0.0-template.json \
   --parameters ParameterKey=AvailabilityZones,ParameterValue="us-east-1a,us-east-1b" \
   --region us-east-1
 ```
@@ -189,15 +189,15 @@ aws cloudformation describe-stacks --stack-name my-security-hub
 # Enable complete security monitoring
 aws cloudformation create-stack \
   --stack-name security-foundation \
-  --template-body file://EnableAWSSecurityHub.yaml
+  --template-body file://templates/EnableAWSSecurityHub.yaml
 
 aws cloudformation create-stack \
   --stack-name threat-detection \
-  --template-body file://EnableAmazonGuardDuty.yaml
+  --template-body file://templates/EnableAmazonGuardDuty.yaml
 
 aws cloudformation create-stack \
   --stack-name config-monitoring \
-  --template-body file://EnableAWSConfig.yml \
+  --template-body file://templates/EnableAWSConfig.yml \
   --parameters ParameterKey=NotificationEmail,ParameterValue=admin@company.com
 ```
 
@@ -206,7 +206,7 @@ aws cloudformation create-stack \
 # Deploy production VPC
 aws cloudformation create-stack \
   --stack-name prod-vpc \
-  --template-body file://aws-vpc.10.3.0.0-template.json \
+  --template-body file://templates/aws-vpc.10.3.0.0-template.json \
   --parameters \
     ParameterKey=AvailabilityZones,ParameterValue="us-west-2a,us-west-2b,us-west-2c" \
     ParameterKey=NumberOfAZs,ParameterValue=3
@@ -214,7 +214,7 @@ aws cloudformation create-stack \
 # Add security groups
 aws cloudformation create-stack \
   --stack-name web-security-groups \
-  --template-body file://vpc-standards-sg.json \
+  --template-body file://templates/vpc-standards-sg.json \
   --parameters ParameterKey=VPC,ParameterValue=vpc-12345678
 ```
 
@@ -223,7 +223,7 @@ aws cloudformation create-stack \
 # Deploy VPN monitoring
 aws cloudformation create-stack \
   --stack-name vpn-monitor \
-  --template-body file://check-vpn-on-EC2.json \
+  --template-body file://templates/check-vpn-on-EC2.json \
   --parameters \
     ParameterKey=EC2InstanceId,ParameterValue=i-1234567890abcdef0 \
     ParameterKey=TargetIP,ParameterValue=10.0.1.100 \
@@ -232,7 +232,7 @@ aws cloudformation create-stack \
 # Schedule the function
 aws cloudformation create-stack \
   --stack-name vpn-scheduler \
-  --template-body file://trigger-lambda-by-cron.json \
+  --template-body file://templates/trigger-lambda-by-cron.json \
   --parameters \
     ParameterKey=LambdaFunctionName,ParameterValue=check-vpn-on-EC2 \
     ParameterKey=SchedulePeriod,ParameterValue="rate(15 minutes)"
