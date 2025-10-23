@@ -1,6 +1,8 @@
 # ☁️ CloudFormation Templates by Lechu
 
-Welcome to my collection of AWS CloudFormation templates! 🚀 This repository contains production-ready templates for various AWS services and infrastructure patterns.
+Welcome to my collection of AWS CloudFormation templates! 🚀 This repository contains templates for various AWS services and infrastructure patterns.
+
+⚠️ **Disclaimer**: Regardless that I use these templates in production environments, these templates are provided as-is for educational and experimental purposes. Use at your own risk and thoroughly test in your own environment before any deployment. The author is not responsible for any damages or issues that may arise from using these templates.
 
 ## 📋 Table of Contents
 
